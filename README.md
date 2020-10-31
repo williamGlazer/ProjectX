@@ -1,5 +1,8 @@
 # ProjectX
 
+### To get ./DATA folder
+    goto [here](https://drive.google.com/file/d/1tVzaaIn_Jg6Dk4u-ho55wMCFomvH8du3/view?usp=sharing)
+
 ### To open a notebook in google collab
     Navigate to http://colab.research.google.com/github.
     Click the "Include Private Repos" checkbox.
