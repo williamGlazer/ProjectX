@@ -6,7 +6,7 @@ from pathlib import Path
 
 # -- FETCH --
 print("FETCHING DF")
-DATA_FOLDER = "./data/"
+DATA_FOLDER = "../../data/"
 CAMS_FOLDER = DATA_FOLDER + "cams/"
 
 CAMS_CSVs = ["10_oct.csv",  "3_mar.csv",  "6_jun.csv",  "9_sept.csv",
@@ -64,10 +64,11 @@ df = df.sort_values(["shapeID", "time"])
 
 # -- PCA --
 N_PC = 11
-col_names = df.columns.drop(["shapeID","time","tc_ch4","tc_c2h6","tc_c3h8","tc_c5h8"])
+col_names = df.columns.drop(["shapeID", "time", "tc_ch4", "tc_c2h6", "tc_c3h8", "tc_c5h8"])
 # get vals and Standardize for PCA
 print("DOING SCALING")
 data = scale(np.matrix(df[col_names].values))
+data = np.nan_to_num(data)
 print("DOING PCA")
 x = PCA(n_components=N_PC).fit_transform(data)
 
@@ -78,4 +79,4 @@ X = pd.DataFrame(df[["shapeID", "time"]])
 for i in range(N_PC):
     X["x"+str(i)] = x[:, i]
 print("EXPORTING CSVs")
-X.to_csv(DATA_FOLDER + "X/cams_data.csv")
+X.to_csv(DATA_FOLDER + "cams_data.csv", index=False)
