@@ -32,8 +32,8 @@ for aod in AODs:
 for aod in AODs:
     df[aod] /= aodSums
 for AOD in AODs:
-    df[AOD] = -np.log(1.0/(0.0001 + df[AOD]*0.9998) - 1)
-df["aod550"] = np.log(df["aod550"] + max(1e-15, min(df["aod550"])))
+    df[AOD] = -np.log(1.0/(1e-14 + df[AOD]*(1.0 - 2e-14)) - 1)
+df["aod550"] = np.log(df["aod550"] + 1e-15)
 
 
 # -- PM ---
@@ -44,7 +44,7 @@ df["pm2p5"] *= 10**9
 df["pm10"] *= 10**9
 pms = ["pm1", "pm2p5", "pm10"]
 for pm in pms:
-    df[pm] = np.log10(df[pm] + max(1e-15, min(df[pm])))
+    df[pm] = np.log10(df[pm] + 1e-15)
 
 
 # -- TCS --
@@ -56,7 +56,7 @@ for tc in tcs:
     maxLog *= 3
     df[tc] *= 10**-maxLog
 for tc in tcs:
-    df[tc] = np.log10(df[tc] + max(1e-15, min(df[tc])))
+    df[tc] = np.log10(df[tc] + 1e-15)
 
 df["time"] = pd.to_datetime(df["time"])
 df = df.sort_values(["shapeID", "time"])
@@ -64,7 +64,7 @@ df = df.sort_values(["shapeID", "time"])
 
 # -- PCA --
 N_PC = 11
-col_names = df.columns.drop(["shapeID", "time", "tc_c5h8"])
+col_names = df.columns.drop(["shapeID","time","tc_ch4","tc_c2h6","tc_c3h8","tc_c5h8"])
 # get vals and Standardize for PCA
 print("DOING SCALING")
 data = scale(np.matrix(df[col_names].values))
