@@ -9,7 +9,7 @@ print("FETCHING DF")
 DATA_FOLDER = "../../data/"
 CAMS_FOLDER = DATA_FOLDER + "cams/"
 
-CAMS_CSVs = ["10_oct.csv",  "3_mar.csv",  "6_jun.csv",  "9_sept.csv",
+CAMS_CSVs = ["10_oct.csv", "11_nov.csv",  "3_mar.csv",  "6_jun.csv",  "9_sept.csv",
              "1_jan.csv",   "4_apr.csv",  "7_jul.csv",
              "2_feb.csv",   "5_may.csv",  "8_aug.csv"]
 df = pd.DataFrame()
